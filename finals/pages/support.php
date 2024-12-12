@@ -74,7 +74,16 @@
       height: 30px;
       position: relative;
     }
-    .user-icon {
+    .view-more  {
+    color: #fff;
+    font-size: 1.8rem;
+    transition: color 0.3s, transform 0.3s;
+    position: absolute; /* Use absolute positioning */
+    right: 70px; /* Adjust this value to your preference */
+    top: 50%; /* Vertically center the icon */
+    transform: translateY(-50%); /* Adjust the centering */
+    }
+    .view-more2  {
     color: #fff;
     font-size: 1.8rem;
     transition: color 0.3s, transform 0.3s;
@@ -82,7 +91,7 @@
     right: 10px; /* Adjust this value to your preference */
     top: 50%; /* Vertically center the icon */
     transform: translateY(-50%); /* Adjust the centering */
-}
+    }
 
 
     .support-section {
@@ -244,14 +253,16 @@ footer .background-shape {
 <div class="hover-zone">
   <div class="navbar-container">
     <ul>
-    <li><a href="home.php">Home</a></li>
+    <li><a href="../index.php">Home</a></li>
       <li><a href="aboutUs.php">About Us</a></li>
       <li><a href="game.php">Games</a></li>
       <li><a href="support.php">Support</a></li>
       <li><a href="contact.php">Contact Us</a></li>
-      <a href="#" class="user-icon-container text-decoration-none">
-            <i class="fas fa-user-circle user-icon"></i>
-          </a>
+      <a href="../login.php" class="user-icon-container text-decoration-none">
+        <i class="fas fa-ellipsis-h view-more"></i>
+      </a>
+        <a href="../pages/user.php"><i class="fas fa-user-circle user-icon view-more2"></i>
+      </a>
     </ul>
   </div>
 </div>

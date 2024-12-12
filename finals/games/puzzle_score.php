@@ -3,7 +3,7 @@
 include('../lib/functions/game_db/config.php');  // Adjust the path as necessary
 
 // Query to get the sum of the score column
-$sql = "SELECT SUM(score) AS total_score FROM quiz";
+$sql = "SELECT SUM(score) AS total_score FROM puzzle_st";
 $result = $conn->query($sql);
 ?>
 
@@ -71,7 +71,7 @@ $result = $conn->query($sql);
     // Close the connection
     $conn->close();
     ?>
-    <button type="button" class="score-btn" onclick="window.location.href='1st.php';">Back</button>
+    <button type="button" class="score-btn" onclick="window.location.href='puzzle1.php';">Back</button>
 </div>
 
 </body>

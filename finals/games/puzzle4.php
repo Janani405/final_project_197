@@ -1,37 +1,33 @@
-
-
 <?php
-// Start the session to use session variables
-session_start();
-
 // Include database connection
 include('../lib/functions/game_db/config.php'); // Ensure this file contains your DB connection settings
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check if session 'id' is set
-    if (isset($_SESSION['id'])) {
-        $userId = $_SESSION['id']; // Get the logged-in user ID from the session
-        $gameType = "quiz"; // Replace with dynamic game type if needed
-        $level = 1; // Replace with the game level
-        $score = 10; // Replace with the calculated score for this game
+    // Game details (customize these as needed)
+    $gameType = "puzzle"; // Replace with dynamic game type if needed
+    $level = 1; // Replace with the game level
+    $score = 10; // Replace with the calculated score for this game
 
-        // Insert the score into the database
-        $sql = "INSERT INTO puzzle (id, Game_Type, Level, Score) VALUES ('$userId', '$gameType', '$level', '$score')";
+    // Insert the score into the database
+    $sql = "INSERT INTO puzzle_st (Game_Type, Level, Score) VALUES (?, ?, ?)";
 
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('Score inserted successfully!');</script>";
-        } else {
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param("sii", $gameType, $level, $score);
+        if (!$stmt->execute()) {
             echo "<script>alert('Error: " . $conn->error . "');</script>";
         }
-
-        // Add the current score to the total score in session
-        if (isset($_SESSION['total_score'])) {
-            $_SESSION['total_score'] += $score;
-        } else {
-            $_SESSION['total_score'] = $score;
-        }
+        $stmt->close();
     } else {
-        echo "<script>alert('User not logged in!');</script>";
+        echo "<script>alert('Database preparation error: " . $conn->error . "');</script>";
+    }
+
+    // Add the current score to the total score in session
+    session_start();
+    if (isset($_SESSION['total_score'])) {
+        $_SESSION['total_score'] += $score;
+    } else {
+        $_SESSION['total_score'] = $score;
     }
 }
 ?>
@@ -179,6 +175,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   .skip-btn:hover {
     background-color: #6FA8D6;
   }
+  .score-btn{
+      background-color: #FFEB8C;
+    }
+    .score-btn:hover {
+      background-color: #ffdc40;
+    }
 
   /* Responsive Styles */
   @media (max-width: 768px) {
@@ -230,11 +232,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="hover-zone">
     <div class="navbar-container">
     <ul>
-    <li><a href="home.php">Home</a></li>
-      <li><a href="aboutUs.php">About Us</a></li>
-      <li><a href="game.php">Games</a></li>
-      <li><a href="support.php">Support</a></li>
-      <li><a href="contact.php">Contact Us</a></li>
+    <li><a href="../index.php">Home</a></li>
+        <li><a href="../pages/aboutUs.php">About Us</a></li>
+        <li><a href="../pages/game.php">Games</a></li>
+        <li><a href="../pages/support.php">Support</a></li>
+        <li><a href="../pages/contact.php">Contact Us</a></li>
     </ul>
     </div>
   </div>
@@ -260,6 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <button type="submit" class="submit-btn">Submit</button>
       <button type="button" class="skip-btn" onclick="window.location.href='puzzle5.php';">Skip</button>
+      <button type="button" class="score-btn" onclick="window.location.href='puzzle_score.php';">Score</button>
     </form>
   </div>
 </body>
