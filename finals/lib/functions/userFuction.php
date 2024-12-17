@@ -12,7 +12,7 @@ include_once("db_conn.php");
 /**
  * User registration function
  */
-function userRegistration($userName, $userEmail, $userPass, $userPhone) {
+function userRegistration($userName, $userEmail,  $userPhone, $userPass,) {
     $db_conn = Connection();
 
     // Use prepared statements to prevent SQL injection
@@ -42,11 +42,16 @@ function userRegistration($userName, $userEmail, $userPass, $userPhone) {
         return "Error binding parameters for login: " . $insertLoginQuery->error;
     }
 
-    if (!$insertLoginQuery->execute()) {
-        return "Error inserting login details: " . $insertLoginQuery->error;
-    }
+   if (!$insertLoginQuery->execute()) {
+    echo "<script>alert('Error inserting login details: " . $insertLoginQuery->error . "');</script>";
+    return;
+}
 
-    return "Your registration was successful!";
+echo "<script>
+    alert('Your registration was successful!');
+    window.location.href = 'login.php';
+</script>";
+
 }
 
 /**
@@ -75,7 +80,7 @@ function authenticateUser($userName, $userPass) {
 
     // Convert user password into hashed value using MD5
     $newpass = md5($userPass);
-
+    // return $newpass;
     // Check the number of rows
     $norows = mysqli_num_rows($sqlResult);
 
