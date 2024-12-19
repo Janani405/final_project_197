@@ -384,7 +384,6 @@
       <li><a href="home.php">Home</a></li>
       <li><a href="aboutUs.php">About Us</a></li>
       <li><a href="#">Games</a></li>
-      <li><a href="support.php">Support</a></li>
       <li><a href="#">Contact Us</a></li>
     </ul>
       </div>

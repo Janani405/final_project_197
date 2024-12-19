@@ -7,8 +7,6 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,39 +92,39 @@ if (isset($_POST['submit'])) {
             color: #999;
         }
         @media (max-width: 768px) {
-    .item {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
+            .item {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
 
-    .item h1 {
-        font-size: 32px;
-    }
+            .item h1 {
+                font-size: 32px;
+            }
 
-    .item img {
-        height: 50px;
-    }
-}
+            .item img {
+                height: 50px;
+            }
+        }
 
-@media (max-width: 576px) {
-    .item {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+        @media (max-width: 576px) {
+            .item {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
 
-    .item h1 {
-        font-size: 28px;
-    }
+            .item h1 {
+                font-size: 28px;
+            }
 
-    .item input {
-        padding: 10px;
-        font-size: 14px;
-    }
+            .item input {
+                padding: 10px;
+                font-size: 14px;
+            }
 
-    .button {
-        font-size: 14px;
-    }
-}
+            .button {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -136,28 +134,47 @@ if (isset($_POST['submit'])) {
             <h1><strong>Create an Account</strong></h1>
         </div>
         <div class="card-body">
-            <form action="lib/route/user/registration.php" method="post">
+            <form id="registration-form" action="lib/route/user/registration.php" method="post">
                 <div class="mb-3">
                     <label for="userName" class="form-label">Name</label>
-                    <input type="text" name="userName" id="userName" class="form-control" >
+                    <input type="text" name="userName" id="userName" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="userEmail" class="form-label">Email</label>
-                    <input type="email" name="userEmail" id="userEmail" class="form-control" >
+                    <input type="email" name="userEmail" id="userEmail" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="userPhone" class="form-label">Contact Number</label>
-                    <input type="number" name="userPhone" id="userPhone" class="form-control">
+                    <input type="number" name="userPhone" id="userPhone" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="userPass" class="form-label">Password</label>
-                    <input type="password" name="userPass" id="userPass" class="form-control" >
+                    <input type="password" name="userPass" id="userPass" class="form-control" required>
                 </div>
                 <button type="submit" name="btnLogin" class="btn">Register</button>
             </form>
             <br><br>
             <p style="align-items: center; margin-top:10px; font-family:cursive">Already Have An Account? <span><a href="login.php"  style="color: #ffaa00; text-decoration:none;"> Log in</a></span> Here</p>
-            
+        </div>
     </div>
+
+    <script>
+        // Form Validation and Feedback
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission
+
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const phone = document.getElementById('userPhone').value.trim();
+            const password = document.getElementById('userPass').value.trim();
+
+            if (name && email && phone && password) {
+                alert("Thank you for registering! You can now log in.");
+                this.submit(); // If everything is valid, submit the form
+            } else {
+                alert("Please fill in all fields.");
+            }
+        });
+    </script>
 </body>
 </html>

@@ -363,7 +363,6 @@ footer .background-shape {
     <li><a href="#">Home</a></li>
       <li><a href="pages/aboutUs.php">About Us</a></li>
       <li><a href="pages/game.php">Games</a></li>
-      <li><a href="pages/support.php">Support</a></li>
       <li><a href="pages/contact.php">Contact Us</a></li>
       <a href="login.php" class="user-icon-container text-decoration-none">
         <i class="fas fa-ellipsis-h view-more"></i>
